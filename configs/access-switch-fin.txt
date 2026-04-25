@@ -1,0 +1,11 @@
+hostname SW-FIN
+
+vlan 30
+name FINANCE
+
+interface fa0/1
+switchport mode trunk
+
+interface fa0/2
+switchport mode access
+switchport access vlan 30
