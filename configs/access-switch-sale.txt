@@ -1,0 +1,11 @@
+hostname SW-SALE
+
+vlan 40
+name SALE
+
+interface fa0/1
+switchport mode trunk
+
+interface fa0/2
+switchport mode access
+switchport access vlan 40
