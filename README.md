@@ -2,7 +2,8 @@
 
 ## Giới thiệu
 
-Dự án mô phỏng hệ thống mạng doanh nghiệp với nhiều phòng ban (IT, HR, FINANCE, SALE), sử dụng VLAN, routing và firewall để kiểm soát truy cập giữa các phòng ban.
+Dự án mô phỏng hệ thống mạng doanh nghiệp với nhiều phòng ban (IT, HR, FINANCE, SALE).  
+Mục tiêu là xây dựng một kiến trúc mạng hoàn chỉnh với phân tách VLAN, định tuyến liên VLAN (Inter-VLAN Routing) và áp dụng các chính sách bảo mật bằng ACL và firewall.
 
 ---
 
@@ -12,10 +13,19 @@ Dự án mô phỏng hệ thống mạng doanh nghiệp với nhiều phòng ban
 
 ---
 
-## Phân chia mạng
+## Kiến trúc hệ thống
 
-| Phòng ban | VLAN | IP |
-|----------|------|------|
+- Core Layer: Switch Layer 3 (Cisco 3560) thực hiện routing giữa các VLAN
+- Access Layer: Switch Layer 2 (Cisco 2960) cho từng phòng ban
+- Firewall: Cisco ASA kiểm soát truy cập giữa mạng nội bộ và router
+- Router: Kết nối ra mạng ngoài
+
+---
+
+## Phân chia VLAN
+
+| Phòng ban | VLAN | Subnet |
+|----------|------|--------|
 | IT       | 10   | 192.168.10.0/24 |
 | HR       | 20   | 192.168.20.0/24 |
 | FINANCE  | 30   | 192.168.30.0/24 |
@@ -25,52 +35,80 @@ Dự án mô phỏng hệ thống mạng doanh nghiệp với nhiều phòng ban
 
 ## Công nghệ sử dụng
 
-- VLAN, Trunking
+- VLAN & Trunking (802.1Q)
 - Inter-VLAN Routing (Layer 3 Switch)
 - Static Routing
 - Cisco ASA Firewall
-- ACL (Access Control List)
+- Access Control List (ACL)
 
 ---
 
 ## Chính sách bảo mật
 
-- IT truy cập được tất cả
-- HR bị chặn truy cập FINANCE
-- SALE bị chặn truy cập HR và FINANCE
+- IT có thể truy cập tất cả các phòng ban
+- HR không được truy cập FINANCE
+- SALE không được truy cập HR và FINANCE
+- Các truy cập bị chặn được thực hiện bằng ACL
 
 ---
 
 ## Kiểm thử hệ thống
 
-### ✔ Ping thành công
+### ✔ Truy cập hợp lệ
 
 #### IT → HR
-![IT-HR](screenshots/Ping IT-HR.png)
+![IT to HR](screenshots/ping-it-hr.png)
 
 #### IT → FINANCE
-![IT-FIN](screenshots/Ping IT-FIN .png)
+![IT to FIN](screenshots/ping-it-fin.png)
 
 #### IT → SALE
-![IT-SALE](screenshots/Ping IT-SALE.png)
+![IT to SALE](screenshots/ping-it-sale.png)
 
 ---
 
-### ❌ Ping bị chặn (ACL)
+### ❌ Truy cập bị chặn (theo ACL)
 
 #### HR → FINANCE
-![HR-FIN](screenshots/Ping HR-FIN = false (chặn bởi ACL).png)
+![HR to FIN blocked](screenshots/ping-hr-fin-block.png)
 
 #### SALE → FINANCE
-![SALE-FIN](screenshots/Ping SALE - FIN = false(chặn bởi ACL).png)
+![SALE to FIN blocked](screenshots/ping-sale-fin-block.png)
 
 #### SALE → HR
-![SALE-HR](screenshots/Ping SALE - HR = false(chặn bởi ACL).png)
+![SALE to HR blocked](screenshots/ping-sale-hr-block.png)
 
 ---
 
-## Kết luận
+## Định tuyến
 
-- Hệ thống hoạt động đúng theo thiết kế
-- VLAN và routing hoạt động ổn định
-- ACL đã chặn đúng các truy cập không hợp lệ
+- Core Switch thực hiện định tuyến giữa các VLAN
+- Firewall định tuyến giữa mạng nội bộ và router
+- Router sử dụng static route để truy cập các mạng nội bộ
+
+---
+
+## Kết quả đạt được
+
+- Thiết kế thành công mô hình mạng doanh nghiệp cơ bản
+- Phân tách VLAN rõ ràng giữa các phòng ban
+- Thực hiện routing giữa các mạng nội bộ
+- Áp dụng chính sách bảo mật bằng ACL
+- Kiểm thử thành công cả trường hợp truy cập hợp lệ và bị chặn
+
+---
+
+## Mục tiêu học tập
+
+Dự án giúp củng cố kiến thức về:
+
+- Network Design
+- VLAN & Routing
+- Firewall & Security
+- Phân tích và kiểm thử hệ thống mạng
+
+---
+
+## Tác giả
+
+- Hoai Le
