@@ -1,0 +1,11 @@
+hostname SW-HR
+
+vlan 20
+name HR
+
+interface fa0/1
+switchport mode trunk
+
+interface fa0/2
+switchport mode access
+switchport access vlan 20
