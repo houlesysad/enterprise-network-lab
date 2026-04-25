@@ -9,7 +9,7 @@ Mục tiêu là xây dựng một kiến trúc mạng hoàn chỉnh với phân 
 
 ## Topology
 
-![Network Diagram](topology/network-diagram.png)
+![Network Diagram](topology/network-diagram.jpg)
 
 ---
 
