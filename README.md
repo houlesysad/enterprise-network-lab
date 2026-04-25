@@ -111,4 +111,4 @@ Dự án giúp củng cố kiến thức về:
 
 ## Tác giả
 
-- Hoai Le
+- Lê Đình Hòa
