@@ -8,7 +8,7 @@ Dự án mô phỏng hệ thống mạng doanh nghiệp với nhiều phòng ban
 
 ## Topology
 
-![Network Diagram](network-diagram.png hoặc network-diagram.jpg ✔.jpg)
+![Network Diagram](topology/network-diagram.png)
 
 ---
 
