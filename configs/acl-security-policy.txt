@@ -1,0 +1,14 @@
+ip access-list extended HR_POLICY
+deny ip 192.168.20.0 0.0.0.255 192.168.30.0 0.0.0.255
+permit ip any any
+
+interface vlan 20
+ip access-group HR_POLICY in
+
+ip access-list extended SALE_POLICY
+deny ip 192.168.40.0 0.0.0.255 192.168.20.0 0.0.0.255
+deny ip 192.168.40.0 0.0.0.255 192.168.30.0 0.0.0.255
+permit ip any any
+
+interface vlan 40
+ip access-group SALE_POLICY in
